@@ -29,7 +29,7 @@ app.use(express.static("public"));
 // Handlebars configuration
 var exphbs = require("express-handlebars");
 
-exphbs = require('express3-handlebars'),
+exphbs = require('express-handlebars'),
   app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
   app.set('view engine', 'hbs');
 
@@ -37,6 +37,27 @@ exphbs = require('express3-handlebars'),
 mongoose.connect("mongodb://localhost/week18Populater");
 
 // Routes
+
+// A GET request to render Handlebars
+//GET requests to render Handlebars pages
+app.get("/", function(req, res) {
+  Article.find({"saved": false}, function(error, data) {
+    var hbsObject = {
+      article: data
+    };
+    console.log(hbsObject);
+    res.render("home", hbsObject);
+  });
+});
+
+app.get("/saved", function(req, res) {
+  Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
+    var hbsObject = {
+      article: articles
+    };
+    res.render("saved", hbsObject);
+  });
+});
 
 // A GET request to scrape the New York Times website
 app.get("/scrape", function(req, res) {
