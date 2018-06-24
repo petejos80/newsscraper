@@ -14,6 +14,7 @@ var cheerio = require("cheerio");
 var db = require("./models");
 
 // Include Article
+var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 var PORT = 3000;
