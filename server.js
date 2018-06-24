@@ -2,9 +2,10 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var path = require("path");
 
 
-// Tools for Scrping
+// Tools for Scraping
 var request = require("request")
 var cheerio = require("cheerio");
 
@@ -26,12 +27,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-// Handlebars configuration
+// // Handlebars configuration
+// var exphbs = require("express-handlebars");
+
+// exphbs = require('express-handlebars'),
+//   app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+//   partialsDir: path.join(__dirname, "/views/layouts/partials")
+//   app.set('view engine', 'hbs');
+
+
+
+// Set Handlebars.
 var exphbs = require("express-handlebars");
 
-exphbs = require('express-handlebars'),
-  app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
-  app.set('view engine', 'hbs');
+app.engine("hbs", exphbs({
+    defaultLayout: "main",
+    extname: '.hbs',
+    partialsDir: path.join(__dirname, "/views/layouts/partials")
+}));
+app.set("view engine", "hbs");
+
+
 
 // MongoDB Connection
 mongoose.connect("mongodb://localhost/week18Populater");
@@ -183,27 +199,6 @@ app.post("/articles/delete/:id", function(req, res) {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Create a new note
 app.post("/notes/save/:id", function(req, res) {
 // Create a new note and pass the req.body to the entry
@@ -264,24 +259,6 @@ else {
 }
 });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Start the server
 app.listen(PORT, function() {
