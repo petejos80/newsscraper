@@ -26,6 +26,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+// Handlebars configuration
+var exphbs = require("express-handlebars");
+
+exphbs = require('express3-handlebars'),
+  app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+  app.set('view engine', 'hbs');
+
 // MongoDB Connection
 mongoose.connect("mongodb://localhost/week18Populater");
 
