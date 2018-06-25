@@ -17,7 +17,8 @@ var db = require("./models");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
-var PORT = 3000;
+// Defining the port
+var port = process.env.PORT || 8000;
 
 var app = express();
 
@@ -27,16 +28,6 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
-
-// // Handlebars configuration
-// var exphbs = require("express-handlebars");
-
-// exphbs = require('express-handlebars'),
-//   app.engine('hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
-//   partialsDir: path.join(__dirname, "/views/layouts/partials")
-//   app.set('view engine', 'hbs');
-
-
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -49,9 +40,13 @@ app.engine("hbs", exphbs({
 app.set("view engine", "hbs");
 
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsscraper";
 
-// MongoDB Connection
-mongoose.connect("mongodb://localhost/week18Populater");
+// Set mongoose to leverage built in JavaScript ES6 Promises
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 // Routes
 
@@ -262,6 +257,6 @@ else {
 });
 
 // Start the server
-app.listen(PORT, function() {
-  console.log("App running on port " + PORT + "!");
+app.listen(port, function() {
+  console.log("App is running on port " + port);
 });
