@@ -41,10 +41,15 @@ npm run start
 
 ## Screenshots
 
-* Searching and saving articles:
+* Scraping and saving articles:
 
-![Alt Text](https://media.giphy.com/media/vbQPArpIBBsIyQ66AK/giphy.gif)
+![Alt Text](https://media.giphy.com/media/WxK7vAYDZaKSp86Lj9/giphy.gif)
 
-* Viewing and deleting saved articles:
+* Adding and deleting comments:
 
-![Alt Text](https://media.giphy.com/media/5ibkWbaOWWJIjEX6vU/giphy.gif)
+![Alt Text](https://media.giphy.com/media/9oICNtzvBRaTlbaF68/giphy.gif)
+
+* Deleting saved articles:
+
+![Alt Text](https://media.giphy.com/media/2Y6pst6DZzNWmHODsq/giphy.gif)
+
